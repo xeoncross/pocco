@@ -13,6 +13,9 @@ First you need to install the library using [Composer](http://getcomposer.org/do
 		}
 	}
 
+After you have created a composer.json file you can install Pocco.
+
+	$ composer install
 
 Next, create an index.php file and include and run Pocco.
 
