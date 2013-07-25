@@ -146,7 +146,7 @@
 		}
 
 		td.docs, th.docs {
-			min-width: 300px;
+			min-width: 400px;
 			max-width: 50%;
 			min-height: 5px;
 			padding: 1em 2em;
