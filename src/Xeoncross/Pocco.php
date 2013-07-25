@@ -41,7 +41,7 @@ class Pocco
 		$source = file_get_contents($directory . $file);
 		$sections = $this->parseSource($source);
 
-		$this->render($sections, $file, $files);
+		$this->render($sections, $file, $files, $files_array);
 
 		return true;
 	}
@@ -296,7 +296,7 @@ class Pocco
 	 * @param array $files the array of other project files
 	 * @return void
 	 */
-	public function render($sections, $file, $files)
+	public function render($sections, $file, $files, $files_array)
 	{
 		if( ! $this->layout) {
 			$this->layout = __DIR__ . '/Layout.php';

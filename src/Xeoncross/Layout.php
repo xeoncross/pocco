@@ -255,14 +255,48 @@
 			margin: 0 0 25px 25px;
 			overflow:hidden;
 		}
+		/*
+#jump_page, #jump_wrapper {
+width: 100%;
+background: #ccc;
+float: left;
+padding: 0;
+display: block;
+column-count: 3;
+column-gap: 10px;
+}
 
-		#jump_page .source {
+#jump_page ul {
+margin: 0;
+background: #eee;
+display: inline-block;
+-webkit-column-count: 3;
+-webkit-column-gap: 10px;
+-webkit-column-rule: 8px solid #fc0;
+-moz-column-count: 3;
+-moz-column-gap: 10px;
+-moz-column-rule: 8px solid #fc0;
+}
+*/
+
+/*
+#jump_page div.root {
+	width: 200px;
+	float: left;
+}
+
+#jump_page ul li {
+	display: block;
+}
+*/
+
+		#jump_page .source, #jump_page span {
 			display: block;
 			padding: 5px 10px;
 			text-decoration: none;
 			border-top: 1px solid #eee;
 			float:left;
-			min-width:180px;
+			min-width:200px;
 			text-align:left;
 			text-transform:none;
 			font-size:11px;
@@ -333,9 +367,73 @@
 			Jump To &hellip;
 			<div id="jump_wrapper">
 				<div id="jump_page">
-					<?php foreach($files as $path):?>
-						<a class="source" href="?file=<?php print rawurlencode($path); ?>"><?php print basename($path); ?></a>
+					
+					<?php $currentNamespace = null; ?>
+					<?php ksort($files); ?>
+					<?php foreach($files as $path): ?>
+						<?php
+						$ns = dirname($path);
+						if($ns !== $currentNamespace) {
+							//print '<span>' . $ns . '</span>';
+							$currentNamespace = $ns;
+						}
+						?>
+						<a class="source" href="?file=<?php print rawurlencode($path); ?>"><?php print substr($path, 0, -4); ?></a>
 					<?php endforeach?>
+					
+					<?php 
+
+					/*
+					$displayUL = function($items, $parent = NULL, $level = 0) use(&$displayUL) {
+
+						print "<ul" . ($parent === null ? ' class="root"' : '') . ">\n";
+						foreach($items as $dir => $item) {
+
+							if(is_array($item)) {
+
+								print '<li class="parent">' . $dir;
+								$displayUL($item, $parent . '/' . $dir);
+								print "</li>\n";
+
+							} else {
+								print '<li><a class="source" href="?file=' . $parent . '/' . $item .'">' . basename($item, '.php') . "</a></li>\n";
+							}
+						}
+						print "</ul>\n";
+					};
+
+					$displayUL = function($items, $parent = NULL, $level = 0) use(&$displayUL) {
+
+						print "<div" . ($parent === null ? ' class="root"' : '') . ">\n";
+						foreach($items as $dir => $item) {
+
+							if(is_array($item)) {
+
+								print '<div class="parent">' . $dir ;
+								$displayUL($item, $parent . '/' . $dir);
+								print "</div>\n";
+
+							} else {
+								print '<a class="source" href="?file=' . $parent . '/' . $item .'">' . basename($item, '.php') . "</a>\n";
+							}
+						}
+						print "</div>\n";
+					};
+
+					foreach($files_array as $i => $array) {
+
+						if(is_array($array)) {
+							unset($files_array[$i]);
+							$displayUL($array);
+						}
+					}
+
+					//print_r($files_array);
+
+					$displayUL($files_array);
+					
+					*/
+					?>
 				</div>
 			</div>
 		</div>
@@ -358,6 +456,34 @@
 			</tr>
 		</thead>
 	<tbody>
+
+	<tr>
+		<!--<td class="docs"><pre><?php ksort($files_array); print_r($files_array); ?></pre></td>-->
+		<td class="docs">
+			<?php 
+			$displayUL = function($items, $parent = NULL, $level = 0) use(&$displayUL) {
+
+				print "<ul>\n";
+				foreach($items as $dir => $item) {
+
+					if(is_array($item)) {
+
+						print '<li>' . $dir;
+						$displayUL($item, $parent . '/' . $dir);
+						print "</li>\n";
+
+					} else {
+						print '<li><a class="source" href="?file=' . $parent . '/' . $item .'">' . basename($item, '.php') . "</a></li>\n";
+					}
+				}
+				print "</ul>\n";
+			};
+
+			$displayUL($files_array);
+			?>
+		</td>
+	</tr>
+
 
 	<?php foreach ($sections as $count => $section) { ?>
 		<tr id="section-<?php print $count; ?>">
