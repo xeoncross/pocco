@@ -350,7 +350,7 @@
 					<?php foreach ($sections as $count => $section) { ?>
 						<ul id="table-of-contents">
 						<?php if(isset($section['function'])) { ?>
-							<li><a href="#section-<?php print $count; ?>"><?php print $section['function']; ?>()</a></li>
+							<li><a href="#<?php print $section['function']; ?>"><?php print $section['function']; ?>()</a></li>
 						<?php } ?>
 						</ul>
 					<?php } ?>
@@ -360,12 +360,15 @@
 		</thead>
 	<tbody>
 	<?php foreach ($sections as $count => $section) { ?>
-		<tr id="section-<?php print $count; ?>">
+		
+		<?php $baselink = isset($section['function']) ? $section['function'] : 'section-' . $count; ?>
+
+		<tr id="<?php print $baselink; ?>">
 			<td class="docs">
-				<div class="pilwrap"><a class="pilcrow" href="#section-<?php print $count; ?>">&#182;</a></div>
+				<div class="pilwrap"><a class="pilcrow" href="#container">&#182;</a></div>
 
 				<?php if(isset($section['function'])) { ?>
-					<h3><a href="#container"><?php print $section['function']; ?>()</a></h3>
+					<h3><a href="#<?php print $baselink; ?>"><?php print $section['function']; ?>()</a></h3>
 				<?php } ?>
 
 				<?php if(!empty($section['meta']['params'])) { ?>
