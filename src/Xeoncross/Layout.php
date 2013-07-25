@@ -389,7 +389,7 @@
 			</td>
 			<td class="code">
 				<div class="highlight">
-					<pre class="php"><?php print rtrim($section[1]); ?></pre>
+					<pre class="php"><?php print htmlspecialchars(rtrim($section[1]), ENT_QUOTES, 'utf-8'); ?></pre>
 				</div>
 			</td>
 		</tr>

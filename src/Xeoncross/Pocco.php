@@ -5,6 +5,8 @@ namespace Xeoncross;
 class Pocco
 {
 
+	public $layout = null;
+
 	/**
 	 * Parse and display the Pocco documentation for the given directory and
 	 * all contained PHP files. You may also specify the default file to show
@@ -296,7 +298,11 @@ class Pocco
 	 */
 	public function render($sections, $file, $files)
 	{
-		require(__DIR__ . '/Layout.php');
+		if( ! $this->layout) {
+			$this->layout = __DIR__ . '/Layout.php';
+		}
+
+		require($this->layout);
 	}
 
 }
