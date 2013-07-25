@@ -1,0 +1,14 @@
+{
+    "name": "xeoncross/pocco",
+    "description": "The PHP documentation generator (A Docco clone)",
+    "license": "MIT License",
+    "authors": [
+        {
+            "name": "Xeoncross",
+            "email": "david@xeoncross.com"
+        }
+    ],
+    "require": {
+
+    }
+}
