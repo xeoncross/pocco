@@ -5,7 +5,16 @@ The PHP documentation generator that uses your existing source code! Based on th
 
 ## Example
 
-Create an index.php file in the root documentation folder and include and run Pocco.
+First you need to install the library using [Composer](http://getcomposer.org/doc/00-intro.md#globally). Create a `composer.json` file in your documentation folder and type this:
+
+	{
+		"require": {
+			"xeoncross/pocco": "dev-master"
+		}
+	}
+
+
+Next, create an index.php file and include and run Pocco.
 
 	<?php
 
